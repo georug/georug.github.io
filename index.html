@@ -1,1 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solana Airdrop</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Solana Airdrop</h1>
 
+        <!-- Button to connect wallet -->
+        <button id="connectWallet">Connect Wallet</button>
+
+        <!-- Wallet selector dropdown -->
+        <div id="walletSelector" class="wallet-selector" style="display: none;">
+            <select id="walletDropdown">
+                <option value="phantom">Phantom</option>
+                <option value="sollet">Sollet</option>
+            </select>
+            <button id="connectSelectedWallet">Connect</button>
+        </div>
+
+        <!-- Claim Airdrop Button -->
+        <button id="claimAirdrop" style="display: none;">Claim Airdrop</button>
+
+        <!-- Display wallet address -->
+        <div id="walletAddress" style="display: none;"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
