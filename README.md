@@ -1,1 +1,0 @@
-# georug.github.io
