@@ -1,4 +1,4 @@
-// Menyimpan referensi ke tombol
+// Tombol untuk menghubungkan wallet dan claim
 const connectButton = document.getElementById('connectWallet');
 const claimButton = document.getElementById('claimAirdrop');
 const walletAddressDiv = document.getElementById('walletAddress');
@@ -6,48 +6,60 @@ const walletAddressDiv = document.getElementById('walletAddress');
 // Fungsi untuk menghubungkan wallet
 async function connectWallet() {
     try {
-        // Mengecek apakah wallet Solana tersedia di browser
+        // Mengecek apakah window.solana ada
         if (window.solana) {
-            // Cek wallet yang tersedia
+            // Cek apakah Phantom wallet terdeteksi
             if (window.solana.isPhantom) {
-                // Jika Phantom tersedia
-                const response = await window.solana.connect();
-                const publicKey = response.publicKey.toString();
-                walletAddressDiv.innerHTML = `Connected to Phantom: ${publicKey}`;
-                walletAddressDiv.style.display = 'block';
-                connectButton.style.display = 'none'; // Sembunyikan tombol Connect
-                claimButton.style.display = 'inline-block'; // Tampilkan tombol claim
-            } 
+                await connectToPhantom();
+            }
             // Cek Sollet wallet
             else if (window.solana.isSollet) {
-                const response = await window.solana.connect();
-                const publicKey = response.publicKey.toString();
-                walletAddressDiv.innerHTML = `Connected to Sollet: ${publicKey}`;
-                walletAddressDiv.style.display = 'block';
-                connectButton.style.display = 'none'; // Sembunyikan tombol Connect
-                claimButton.style.display = 'inline-block'; // Tampilkan tombol claim
+                await connectToSollet();
             }
             // Cek Solflare wallet
             else if (window.solana.isSolflare) {
-                const response = await window.solana.connect();
-                const publicKey = response.publicKey.toString();
-                walletAddressDiv.innerHTML = `Connected to Solflare: ${publicKey}`;
-                walletAddressDiv.style.display = 'block';
-                connectButton.style.display = 'none'; // Sembunyikan tombol Connect
-                claimButton.style.display = 'inline-block'; // Tampilkan tombol claim
+                await connectToSolflare();
             }
-            // Jika wallet tidak dikenali
+            // Cek wallet lain jika tersedia
             else {
                 alert("Wallet yang terdeteksi tidak didukung.");
             }
         } else {
-            alert("Tidak ada wallet Solana yang terdeteksi di browser Anda. Harap instal wallet seperti Phantom, Sollet, atau Solflare.");
+            alert("Tidak ada wallet Solana yang terdeteksi di browser Anda. Harap install Phantom, Sollet, atau Solflare.");
         }
     } catch (err) {
-        console.error("Error connecting wallet:", err);
-        alert("Terjadi kesalahan saat menghubungkan wallet.");
+        console.error("Terjadi kesalahan saat menghubungkan wallet:", err);
     }
 }
 
-// Menambahkan event listener pada tombol connect wallet
+// Fungsi untuk koneksi ke Phantom Wallet
+async function connectToPhantom() {
+    const response = await window.solana.connect();
+    const publicKey = response.publicKey.toString();
+    displayWalletInfo(publicKey, "Phantom");
+}
+
+// Fungsi untuk koneksi ke Sollet Wallet
+async function connectToSollet() {
+    const response = await window.solana.connect();
+    const publicKey = response.publicKey.toString();
+    displayWalletInfo(publicKey, "Sollet");
+}
+
+// Fungsi untuk koneksi ke Solflare Wallet
+async function connectToSolflare() {
+    const response = await window.solana.connect();
+    const publicKey = response.publicKey.toString();
+    displayWalletInfo(publicKey, "Solflare");
+}
+
+// Fungsi untuk menampilkan informasi wallet
+function displayWalletInfo(publicKey, walletName) {
+    walletAddressDiv.innerHTML = `Connected to ${walletName}: ${publicKey}`;
+    walletAddressDiv.style.display = 'block';
+    connectButton.style.display = 'none';  // Menyembunyikan tombol Connect
+    claimButton.style.display = 'inline-block';  // Menampilkan tombol Claim
+}
+
+// Event listener untuk tombol Connect Wallet
 connectButton.addEventListener('click', connectWallet);
