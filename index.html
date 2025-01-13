@@ -4,32 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solana Airdrop</title>
-    <link rel="stylesheet" href="https://georug.github.io/styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <h1>Solana Airdrop</h1>
-
-        <!-- Button to connect wallet -->
+        <p>Click below to connect your wallet:</p>
         <button id="connectWallet">Connect Wallet</button>
-
-        <!-- Wallet selector dropdown -->
-        <div id="walletSelector" class="wallet-selector" style="display: none;">
-            <select id="walletDropdown">
-                <option value="phantom">Phantom</option>
-                <option value="sollet">Sollet</option>
-            </select>
-            <button id="connectSelectedWallet">Connect</button>
-        </div>
-
-        <!-- Claim Airdrop Button -->
-        <button id="claimAirdrop" style="display: none;">Claim Airdrop</button>
-
-        <!-- Display wallet address -->
-        <div id="walletAddress" style="display: none;"></div>
+        <p id="walletAddress" style="display:none;"></p>
+        <button id="claimAirdrop" style="display:none;">Claim Airdrop</button>
     </div>
-
-    <script src="https://georug.github.io/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
