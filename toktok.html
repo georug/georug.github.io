@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Akun TikTok</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Laporan Akun TikTok</h1>
+        <form id="reportForm">
+            <label for="username">Username TikTok yang ingin dilaporkan:</label>
+            <input type="text" id="username" placeholder="Masukkan username" required>
+
+            <label for="reason">Alasan pelaporan:</label>
+            <select id="reason">
+                <option value="penghinaan">Penghinaan</option>
+                <option value="konten_tidak_pantas">Konten Tidak Pantas</option>
+                <option value="spam">Spam</option>
+                <option value="lainnya">Lainnya</option>
+            </select>
+
+            <button type="submit">Kirim Laporan</button>
+        </form>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('reportForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const reason = document.getElementById('reason').value;
+
+            // Membuat URL untuk halaman pelaporan TikTok
+            const reportUrl = `https://www.tiktok.com/report?username=${username}&reason=${reason}`;
+
+            // Menampilkan link pelaporan
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <p>Laporan telah berhasil dibuat! Klik link di bawah untuk melaporkan akun ${username}:</p>
+                <a href="${reportUrl}" target="_blank" style="color: #007bff;">Klik untuk melaporkan di TikTok</a>
+            `;
+        });
+    </script>
